@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>The PowerVR Insider SDK User Guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<style type="text/css">
+		<!--
+		@import url('style.css');
+		-->
+		</style>
+		<script type="text/javascript" src="javascript.js">
+          $(document).ready(function() { searchBox.OnSelectItem(0); });
+        </script>
+        <link rel="shortcut icon" href="http://www.imgtec.com/images/img.ico">
+
+</head>
+<body onLoad="javascript:showSection('ContentsSection');">
+    <div id='top' >
+        <div id="titlearea" >
+            <div class="headercontent" >
+                <div class="PVRlogo" >
+                    <a href='http://www.powervrinsider.com'><img border="0" src="PVRlogo.png" width="231" height="80" /></a>
+                </div>
+                <h1><a class="SiteTitle">The PowerVR Insider SDK User Guide</a></h1>
+                <h2 class="SiteSubTitle"><a class="SiteTitle">OpenGL ES 2.0 SDK for Linux ARMv7</a></h2>
+            </div>
+        </div>
+        <div id='navrow' class="tabs">
+            <ul class="tablist">
+                <li><a href='../../../SDKUserGuide/OpenGL ES 2.0 for LinuxARMv7.html'><span>Contents</span></a></li>
+
+<li class="current"><a><span>Installation</span></a></li>
+
+<li><a href='ExamplesSection.html'><span>Examples</span></a></li>
+
+<li><a href='ShellSection.html'><span>PVRShell</span></a></li>
+
+<li><a href='ToolsSection.html'><span>PVRTools</span></a></li>
+
+<li><a href='DocumentationSection.html'><span>Documentation</span></a></li>
+
+<li><a href='ContactSection.html'><span>Contact</span></a></li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class='content'>
+        <div id="Section" class="section">
+            <a name="InstallationSection"><h3>Installation</h3></a>
+
+	<h4>Prerequisites</h4>
+	<p>OpenGL ES 2.0 libraries are not distributed with the PowerVR Insider SDK for Linux. Ask your platform provider for these libraries if you do not have them.</p>
+	<p>You will also need to install the latest platform toolchain on your development machine for your target platform.</p>
+
+	<ol>
+		<h4>Building the Code Examples</h4>
+		<li>
+	<p>Define the TOOLCHAIN environment variable to the toolchain directory, or add the path to the toolchain to the PATH environment variable (i.e. run <span class='code'>export PATH="<i>path to the toolchain</i>:$PATH"</span>).</p>
+		</li>
+		<li>
+	<p>If you want an X11 build and it is available, define the environment variable X11ROOT to point to the freedesktop directory (i.e. <span class='code'>export X11ROOT=/usr/X11R6_SGX</span>)</p>
+		</li>
+		<li>
+	<p>To build individual components go to the directory <span class='path'>Examples/<i>Level</i>/<i>ExampleName</i>/OGLES2/Build/LinuxGeneric</span> and run the command:</p>
+	<p class='code'>	LinuxRaw: 	"make PLATFORM=Linux_armv7"</p>
+	<p class='code'>	LinuxX11:	"make PLATFORM=Linux_armv7 X11BUILD=1"</p>
+	<p>The executables for the examples will go to:
+	<span class='path'>Examples/<i>Level</i>/<i>ExampleName</i>/OGLES2/Build/Linux_armv7/<i>ReleaseDir</i></span> where <span class='path'>ReleaseDir</span> is one of <span class='path'>ReleaseRaw</span> or <span class='path'>ReleaseX11</span>, <span class='path'>ExampleName</span> is the name of the example that you are building and <span class='path'>Level</span> is will be either Beginner, Intermediate or Advanced.</p>
+		</li>
+		<h4>Running Executables</h4>
+		<li>
+	<p>Ensure that the PowerVR drivers are installed on the target device (please refer to DDK / driver installation instructions).</p>
+		</li>
+		<li>
+	<p>If the standard C++ libraries are not present on your target device, copy libc++ from the toolchain into /usr/lib. libdl and libgcc may also be required.</p>
+	<p>Note: libc++ lives at /usr/lib if you have installed the drivers, or can be found as part of a binary driver release package.</p>
+		</li>
+		<li>
+	<p>Ensure the drivers are running (e.g. type /etc/init.d/rc/pvr start, then run an X session if required).</p>
+	<p>Under X11, window sizes can be specified for the executables using the command line arguments <span class='code'>-posx=n</span> and <span class='code'>-posy=n</span> to define the top right hand corner, and <span class='code'>-width=n</span> and <span class='code'>-height=n</span> to define width and height, respectively.</p>
+	<p>For example:</p>
+		<p class='code'>./OGLES2IntroducingPOD  -posx=10 -posy=10 -width=100 -height=100</p>
+		</li>
+		<li>
+<p>If you attempt to run an SDK example and it fails with the message: "Can't open display" produced by the X client, then make sure that the DISPLAY variable is set with the shell command:</p>
+<p class='code'>"set | grep -e DISPLAY"</p>
+<p>If this command doesn't yield any output then type (in shell):
+<p class='code'>"DISPLAY=:0.0; export DISPLAY"</p>
+		</li>
+	</ol>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="headercontent">
+            <div class="CopyrightBar"><img src="img-footer-logo-white.png" align="absmiddle" height="22" width="40" color="white">&nbsp; &copy; 
+                <a href="http://www.powervrinsider.com" target="_blank">Imagination Technologies Limited.</a> All rights reserved.<br>
+            </div>
+        </div>
+    </div>
+    
+      <!-- Included JS Files (Compressed) -->
+  <script src="foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="app.js"></script>
+
+</body>
+</html>

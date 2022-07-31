@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>The PowerVR Insider SDK User Guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<style type="text/css">
+		<!--
+		@import url('style.css');
+		-->
+		</style>
+		<script type="text/javascript" src="javascript.js">
+          $(document).ready(function() { searchBox.OnSelectItem(0); });
+        </script>
+        <link rel="shortcut icon" href="http://www.imgtec.com/images/img.ico">
+
+</head>
+<body onLoad="javascript:showSection('ContentsSection');">
+    <div id='top' >
+        <div id="titlearea" >
+            <div class="headercontent" >
+                <div class="PVRlogo" >
+                    <a href='http://www.powervrinsider.com'><img border="0" src="PVRlogo.png" width="231" height="80" /></a>
+                </div>
+                <h1><a class="SiteTitle">The PowerVR Insider SDK User Guide</a></h1>
+                <h2 class="SiteSubTitle"><a class="SiteTitle">OpenGL ES 1.1 SDK for Android </a></h2>
+            </div>
+        </div>
+        <div id='navrow' class="tabs">
+            <ul class="tablist">
+                <li><a href='../../../SDKUserGuide/OpenGL ES 1.1 for Android.html'><span>Contents</span></a></li>
+
+<li><a href='InstallationSection.html'><span>Installation</span></a></li>
+
+<li><a href='ExamplesSection.html'><span>Examples</span></a></li>
+
+<li class="current"><a><span>PVRShell</span></a></li>
+
+<li><a href='ToolsSection.html'><span>PVRTools</span></a></li>
+
+<li><a href='DocumentationSection.html'><span>Documentation</span></a></li>
+
+<li><a href='ContactSection.html'><span>Contact</span></a></li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class='content'>
+        <div id="Section" class="section">
+            <a name="ShellSection"><h3>PVRShell</h3></a>
+<p>PVRShell is used in all our <a href='ExamplesSection.html'>Examples</a> (apart from HelloAPI) to provide a common framework for developing OpenGL ES 2 applications on any PowerVR platform.  The shell takes a set of command-line arguments which allow things like the position and size of the example to be controlled. The table below shows these options.</p>
+<p>PVRShell also provides limited keyboard input which may vary depending on your actual platform. If your platform has full keyboard support, the Q key will quit the application and the cursor keys will allow looping through the application options.</p>
+
+<table class='twelve'>
+    <thead>
+	<th>Option</th><th>Description</th>
+    </thead>
+    <tr>
+		<td>-width=N</td><td>Sets the viewport width to N.</td>
+    </tr>
+    <tr>
+		<td>-height=N</td><td>Sets the viewport height to N.</td>
+    </tr>
+    <tr>
+		<td>-posx=N</td><td>Sets the x coordinate of the viewport.</td>
+    </tr>
+    <tr>
+		<td>-posy=N</td><td>Sets the y coordinate of the viewport.</td>
+    </tr>
+    <tr>
+        <td>-FSAAMode=N or -a=N</td><td>Sets full screen anti-aliasing. N can be: 0=no AA , 1=2x AA , 2=4x AA</td>
+    </tr>
+    <tr>
+        <td>-fullscreen=[1,0]</td><td>Runs in full-screen mode(1) or windowed (0)</td>
+    </tr>
+    <tr>
+        <td>-powersaving=[1,0]</td><td>Where available enable/disable power saving.</td>
+    </tr>
+    <tr>
+        <td>-quitaftertime=N or -qat=N</td><td>Sets the x coordinate of the viewport.</td>
+    </tr>
+    <tr>
+        <td>-vsync=N</td><td>Where available modify the apps vsync parameters</td>
+    </tr>
+    <tr>
+        <td>-version</td><td>Output the SDK version to the debug output.</td>
+    </tr>
+    <tr>
+        <td>-info</td><td>Output setup information to the debug output.</td>
+    </tr>
+    <tr>
+        <td>-rotatekeys=N</td><td>Sets the orientation of the keyboard input. N can be: 0-3, 0 is no rotation.</td>
+    </tr>
+    <tr>
+        <td>-c=N</td><td>Save a single screenshot or a range. e.g. -c=1-10, -c=14.</td>
+    </tr>
+    <tr>
+        <td>-priority=N</td><td>Sets the priority of the EGL context.</td>
+    </tr>
+    <tr>
+        <td>-colourbpp=N</td><td>When choosing an EGL config N will be used as the value for EGL_BUFFER_SIZE.</td>
+    </tr>
+    <tr>
+        <td>-config=N</td><td>Force the shell to use the EGL config with ID N.</td>
+    </tr>
+    <tr>
+        <td>-display</td><td>EGL only. Allows you to specify the native display to use if the device has more that one.</td>
+    </tr>
+</table>
+
+<p>The Shell source can be found in the <a href='../../../Shell/'>Shell</a> folder in the SDK package.</p>
+<p>More documentation is available at <a href='../../../Shell/Documentation/Index.html'>Shell/Documentation</a>.</p>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="headercontent">
+            <div class="CopyrightBar"><img src="img-footer-logo-white.png" align="absmiddle" height="22" width="40" color="white">&nbsp; &copy; 
+                <a href="http://www.powervrinsider.com" target="_blank">Imagination Technologies Limited.</a> All rights reserved.<br>
+            </div>
+        </div>
+    </div>
+    
+      <!-- Included JS Files (Compressed) -->
+  <script src="foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="app.js"></script>
+
+</body>
+</html>

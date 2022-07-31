@@ -1,0 +1,19 @@
+:Title:
+MultiThreading
+
+:ShortDescription:
+This training course is an example of how to correctly use syncronisation techniques to achieve multi-threaded rendering.
+
+:FullDescription:
+This training course demonstrates how to load resources on a seperate thread to the main rendering thread. While this may seem a trivial exercise, API extension functionality must be utilised in order to achieve correct results.
+Three different implementations are provided:
+	- Windows	-	KHR_fence_sync EGL extension is utilised in conjunction with Windows native threading library.
+	- iOS		-	GL_APPLE_sync GL extneion is utilised in conjunction with Posix threads.
+	- Posix		-	KHR_fence_sync EGL extension is utilised in conjunction with Posix threads.
+
+Because GL defines that a seperate context must be created on a per-thread basis this example uses 'share groups' in order to share resources between different contexts. However, syncronisation between these two contexts can be a problem.
+In order to achieve syncronisation a fence sync object must be placed in to the GL command stream which becomes signaled once preceeding commands are fully completed. This ensures that the GL state is fully realised and resources are ready to be used.
+
+Controls:
+	-	Esc	-	Close the application
+

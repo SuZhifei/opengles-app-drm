@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>The PowerVR Insider SDK User Guide</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<style type="text/css">
+		<!--
+		@import url('style.css');
+		-->
+		</style>
+		<script type="text/javascript" src="javascript.js">
+          $(document).ready(function() { searchBox.OnSelectItem(0); });
+        </script>
+        <link rel="shortcut icon" href="http://www.imgtec.com/images/img.ico">
+
+</head>
+<body onLoad="javascript:showSection('ContentsSection');">
+    <div id='top' >
+        <div id="titlearea" >
+            <div class="headercontent" >
+                <div class="PVRlogo" >
+                    <a href='http://www.powervrinsider.com'><img border="0" src="PVRlogo.png" width="231" height="80" /></a>
+                </div>
+                <h1><a class="SiteTitle">The PowerVR Insider SDK User Guide</a></h1>
+                <h2 class="SiteSubTitle"><a class="SiteTitle">OpenGL ES 2.0 SDK for Android </a></h2>
+            </div>
+        </div>
+        <div id='navrow' class="tabs">
+            <ul class="tablist">
+                <li><a href='../../../SDKUserGuide/OpenGL ES 2.0 for Android.html'><span>Contents</span></a></li>
+
+<li class="current"><a><span>Installation</span></a></li>
+
+<li><a href='ExamplesSection.html'><span>Examples</span></a></li>
+
+<li><a href='ShellSection.html'><span>PVRShell</span></a></li>
+
+<li><a href='ToolsSection.html'><span>PVRTools</span></a></li>
+
+<li><a href='DocumentationSection.html'><span>Documentation</span></a></li>
+
+<li><a href='ContactSection.html'><span>Contact</span></a></li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class='content'>
+        <div id="Section" class="section">
+            <a name="InstallationSection"><h3>Installation</h3></a>
+
+<h4>Option 1: Android SDK Manager</h4>
+
+<p>The following instructions for building the examples in the PowerVR Insider SDK assume that you have an Eclipse environment with the Android SDK and NDK installed and as well as the NDK Eclipse plug-in. For more details please read <a class='reference' href='http://tools.android.com/recent/usingthendkplugin'>http://tools.android.com/recent/usingthendkplugin</a>
+
+<p>To download the Android PowerVR Insider SDK through the Android SDK Manager follow the next steps: </p>
+<ul>
+	<li>Open the Android SDK manager </li>
+	<li>Open the Tools-->Manage Add-on Sites window and click the User Defined Sites tab </li>
+	<li>Click to New... and add the following URL: <a class='reference' href='http://install.powervrinsider.com/androidsdk.xml'>http://install.powervrinsider.com/androidsdk.xml</a></li>
+	<li>The PowerVR SDK should appear now on the Packages list (Under API 10)</li>
+</ul>
+
+<p>Once the SDK is installed you will need to add the <b>PVRSDKDIR</b> environment variable for your NDK builds. To do so in Eclipse, click on Window and open the Preferences menu, from there navigate to C/C++ --> Build --> Environment and add the variable <b>PVRSDKDIR</b> setting its value to where the add-on is installed (typically under the add-ons directory inside the Android SDK).</p>
+
+<p>All the examples can be imported by selecting the PowerVR SDK during the creation of a new Android sample project in Eclipse.</p>
+
+<p><b>Windows:</b>Please notice that for Windows we recommend to point <b>PVRSDKDIR</b> to ../ and copy the shell/, tools/ and builds/ directories from the add-on folder to your workspace/. This is due to the dropping of support for Windows paths in GNU Make 3.81 onwards. Otherwise the use of paths containing ‘:’ yields the error: *** target pattern contains no `%'.</p>
+
+<p><b>Windows:</b>The Eclipse CDT "Scanner Configuration Builder" appears not to be working with the directory structure of our samples/tools/shell. For that reason is recommended to disable it from your project: Right Click on Project Name --> Properties --> Builders -> Disable the "Scanner Configuration Builder".</p>
+
+<h4>Option 2: PowerVR Insider SDK Installer</h4>
+
+<p>The following instructions for building the examples in the Android PowerVR Insider SDK assume that you have already installed the Android SDK from Google, the NDK and Apache Ant.</p>
+
+<p>To build individual components go to the /Build/Android sub-directory of the component to build. To create local.properties, on first build you will need to run:</p>
+
+<p class='code'>	android update project -p . -t [TARGET]</p>
+
+<p>Where the list of targets can be found with the following command ([TARGET] corresponds to the id number):</p>
+
+<p class='code'>	android list target</p>
+
+<p>To use the 'android' tool you need to have the Android SDK's tool folder in your path. After this, the building of an application is done in two stages. The first stage involves compiling the C++ code into a library. This is achieved using ndk-build which is part of the Android NDK and needs to be present in your path. To compile for all supported platforms type:</p>
+
+<p class='code'>	ndk-build</p>
+
+<p>On an a specific platform you can compile by typing:</p>
+
+<p class='code'>	ndk-build APP_ABI=[PLATFORM]</p>
+
+<p>Replacing [PLATFORM] with an entry from the following list of supported ABIs:</p>
+
+<p class='code'>
+<ul>
+	<li>armeabi</li>
+	<li>armeabi-v7a</li>
+	<li>x86</li>
+	<li>mips</li>
+</ul>
+</p>
+
+<p>The second stage compiles the remaining Java components and creates the .apk file for installing on your device. The quickest way of achieving this is to type:</p>
+
+<p class='code'>	ant debug</p>
+
+which will create an .apk file in ./bin and will handle the signing of your application for you. For creating a release build of your app please see <a class='reference' href='http://developer.android.com/guide/developing/other-ide.html#ReleaseMode'>http://developer.android.com/guide/developing/other-ide.html#ReleaseMode</a> .</p>
+
+        </div>
+    </div>
+    <div class="footer">
+        <div class="headercontent">
+            <div class="CopyrightBar"><img src="img-footer-logo-white.png" align="absmiddle" height="22" width="40" color="white">&nbsp; &copy; 
+                <a href="http://www.powervrinsider.com" target="_blank">Imagination Technologies Limited.</a> All rights reserved.<br>
+            </div>
+        </div>
+    </div>
+    
+      <!-- Included JS Files (Compressed) -->
+  <script src="foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+1. build all example
+        . env_setup.sh <platform>	: setup build option for different platform, now only support ab01 and ab02
+        ./build.sh                 	: build all the example
+	Note:
+		binaries output path		: Binaries/root/sgx_sdk/<platform>
+
+2. build specified example
+        . env_setup.sh <platform>	: setup build option for different platform, now only support ab01 and ab02
+        cd Examples/Advanced/Water/OGLES2/Build/LinuxGeneric	: go to the specified example built path
+		make						: build the specified example
+	Note:
+		binaries output path
+			ab01 --> Examples/Advanced/Water/OGLES2/Build/Linux_armv7hf/
+			ab02 --> Examples/Advanced/Water/OGLES2/Build/Linux_armv7omap/

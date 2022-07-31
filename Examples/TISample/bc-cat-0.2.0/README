@@ -1,0 +1,160 @@
+Video Texture Streaming (Linux)
+
+
+Video texture streaming via IMG 3rdparty bufferclass (bc-cat) module.
+
+The bc-cat module is extended to expose the PVR internal texture buffers to
+application to avoid redundant memory copying and YUV => RGB colorspace
+conversion.
+
+The PVR texture buffers are configurable (number of buffers, width, height,
+pixel format) during runtime via BCIOREQ_BUFFERS ioctl. It could be allocated
+by bc-cat module or by applications.
+
+Multiple texture buffers with different configuration are supported by
+providing multiple bc-cat device nodes, /dev/bccat0 ~ /dev/bccat9.
+
+The bc-cat module has been tested on
+ - OMAP3530 EVM, Graphics SDK v3.01.00.02 and
+   PSP SDK v03.00.00.03 (kernel 2.6.32);
+ - OMAP3530 EVM, Graphics SDK v3.00.00.09 and
+   PSP SDK v02.01.02.09 (kernel 2.6.29);
+ - AM3517 EVM, Graphics SDK v3.00.00.09 (patched) and
+   PSP SDK v3.0.0.2 (kernel 2.6.31);
+ - Beagle board, revC2;
+
+
+Source Directories
+==================
+
+.
+|-- module  # bc kernel module
+|-- test    # bc test apps
+`-- include # GLES/glext.h and GLES2/gl2ext.h
+
+
+module/
+-------
+
+bc_cat kernel module derived from IMG Graphics SDK
+    GFX_Linux_KM/services4/3rdparty/bufferclass_example
+
+Use the following command to load bc-cat module:
+
+    modprobe bc-cat
+
+The 10 device nodes '/dev/bccat0' ~ '/dev/bccat9' will be created
+automatically.
+
+
+test/
+-----
+
+The test apps support either framebuffer or X11, specified at build time.
+
+gles1_bc_mmap
+    It renders a scrolling UYVY color bar pattern onto the six surfaces of a
+    cube using kernel allocated texture buffers. OpenGL ES1.1 version.
+
+gles2_bc_mmap
+    It renders a scrolling UYVY color bar pattern onto the six surfaces of a
+    cube using kernel allocated texture buffers. OpenGL ES2.0 version.
+
+gles1_bc_uptr
+    It is similar to gles1_bc_mmap, but using external texture buffers,
+    allocated by CMEM kernel module.
+
+    To build and run this test app, omap3evm dvsdk has to be installed,
+    and cmemk.ko has to be copied to the <targetfs>/opt/ directory.
+    Execute loadmodules.sh once before run this app.
+
+gles2_bc_uptr
+    It is similar to gles2_bc_mmap, but using external texture buffers,
+    allocated by CMEM kernel module.
+
+gles1_bc_webcam
+    It renders a USB webcam capture stream onto the six surfaces of a cube.
+    OpenGL ES1.1 version.
+
+gles2_bc_webcam
+    It renders a USB webcam capture stream onto the six surfaces of a cube.
+    OpenGL ES2.0 version.
+
+All the test apps support the following command line options.
+
+    -b <id>     - bc device id [default: 0]
+    -c <cap_dev> - specify capture device [default: /dev/video0]
+    -p          - enable profiling
+    -w <width>  - width of texture buffer in pixel, multiple of 32
+    -t <height> - height of texture buffer in pixel
+    -h          - print this help message
+
+    Note:
+        gles1_bc_uptr and gles2_bc_uptr does not support -w & -t properly.
+
+
+IOCTLs
+======
+
+The bc module provides the following IOCTLs, defined in bc_cat.h.
+
+    BCIOGET_BUFFERPHYADDR
+        Retrieve the physical address of a given buffer index.
+
+    BCIOGET_BUFFERIDX
+        Retrieve the index of a given buffer physical address.
+
+    BCIOREQ_BUFFERS
+        Request texture buffers. Returns the number of allocated buffers.
+        The current version only supports the texture buffer up to
+        1.5Kx1.5K in pixel.
+
+    BCIOSET_BUFFERPHYADDR
+        Register the external buffer as a texture buffer to a given index.
+        This ioctl should be called before initialize the IMG extensions.
+
+Obsolete IOCTLs:
+
+    BCIOGET_BUFFERCOUNT
+        Retrieve the number of texture buffers.
+        obsolete, since BCIOREQ_BUFFERS returns the number of allocated
+        buffers.
+
+Usage
+=====
+
+ * Open device '/dev/bccat0' ~ '/dev/bccat9';
+ * Call ioctl BCIOREQ_BUFFERS by providing 'struct bc_buf_param_t' parameter
+   to request texture buffers;
+ * Refer to initTexExt() in main.c in the test application for querying the
+   texture buffer information;
+ * The number of texture buffers, returned by BCIOREQ_BUFFERS, should match
+   the buffer info queried through IMG extension in the last step;
+ * Call ioctl BCIOGET_BUFFERPHYADDR to get the physical address of the texture
+   buffers. Map them to the virtual space if necessary;
+ * In the rendering loop
+ **  Fill the texture data directly into texture buffer;
+ **  Call myglTexBindStreamIMG() in OpenGL ES1.1 app or glBindTexture() in
+     OpenGL ES2.0 app to bind the texture to the rendering object.
+
+
+Performance
+===========
+
+The number below are roughly measured from the test application, running on a
+OMAP3530 EVM. They are not accurate, and only listed here for reference.
+
+    Texture Size       FPS
+    ----------------------
+       <128x128       >180
+        256x256       >170
+        512x512       >100
+      1024x1024        >50
+      1536x1536        >40
+
+
+Known Issue
+===========
+
+* RGB565 pixel format are not tested yet.
+
